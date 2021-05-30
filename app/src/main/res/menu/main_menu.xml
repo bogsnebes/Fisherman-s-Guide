@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+    <group android:checkableBehavior="single">
+        <item android:contentDescription="@string/fish"
+            android:title="@string/fish"
+            android:id="@+id/fish"
+            android:icon="@drawable/ic_fish"/>
+        <item android:contentDescription="@string/bait"
+            android:title="@string/bait"
+            android:id="@+id/bait"
+            android:icon="@drawable/ic_bait"/>
+        <item android:contentDescription="@string/tackle"
+            android:title="@string/tackle"
+            android:id="@+id/tackle"
+            android:icon="@drawable/ic_tackle"/>
+        <item android:contentDescription="@string/history"
+            android:title="@string/history"
+            android:id="@+id/history"
+            android:icon="@drawable/ic_history"/>
+    </group>
+
+</menu>
