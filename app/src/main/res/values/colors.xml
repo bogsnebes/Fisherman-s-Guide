@@ -10,4 +10,5 @@
     <color name="main_color">#A19DE1</color>
     <color name="name_in_list">#FF000000</color>
     <color name="descr_in_list">#696969</color>
+    <color name="backgraund_mainItemList">#DADADA</color>
 </resources>

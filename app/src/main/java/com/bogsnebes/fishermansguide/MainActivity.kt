@@ -1,9 +1,10 @@
 package com.bogsnebes.fishermansguide
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.res.TypedArray
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.navigation.NavigationView
@@ -11,7 +12,8 @@ import com.google.android.material.navigation.NavigationView
 class MainActivity : AppCompatActivity(R.layout.activity_main),
     NavigationView.OnNavigationItemSelectedListener {
     private lateinit var navigationView: NavigationView
-    private lateinit var rcView: RecyclerView
+    private lateinit var mainList: RecyclerView
+    private lateinit var myAdapter: MyAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,27 +21,71 @@ class MainActivity : AppCompatActivity(R.layout.activity_main),
         navigationView = findViewById(R.id.navigation_menu)
         navigationView.setNavigationItemSelectedListener(this)
 
-        rcView = findViewById(R.id.rcView)
+        mainList = findViewById(R.id.mainList)
 
-        val list = ArrayList<ListItems>()
-        list.add(ListItems(R.drawable.shuca, "Бог", "Это Бог"))
-        list.add(ListItems(R.drawable.anonymos, "Anonimus", "Это Анонимус"))
-        list.add(ListItems(R.drawable.monke, "Обезьянка", "Это monke"))
-        list.add(ListItems(R.drawable.morgenshtern, "Morgenshtern", "Это morgen в Армии"))
+        val list = ArrayList<ItemList>()
+        list.addAll(
+            fillArrays(
+                resources.getStringArray(R.array.fish),
+                resources.getStringArray(R.array.fish_description),
+                getImageId(R.array.fish_image)
+            )
+        )
 
-        rcView.hasFixedSize()
-        rcView.layoutManager = LinearLayoutManager(this)
-        rcView.adapter = MyAdapter(list, this)
+        mainList.hasFixedSize()
+        mainList.layoutManager = LinearLayoutManager(this)
+        myAdapter = MyAdapter(list, this)
+        mainList.adapter = myAdapter
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.fish -> Toast.makeText(this, "Test #1", Toast.LENGTH_SHORT).show()
-            R.id.bait -> Toast.makeText(this, "Test #2", Toast.LENGTH_SHORT).show()
+            R.id.fish -> {
+                myAdapter.updateAdapter(
+                    fillArrays(
+                        resources.getStringArray(R.array.fish),
+                        resources.getStringArray(R.array.fish_description),
+                        getImageId(R.array.fish_image)
+                    )
+                )
+            }
+            R.id.bait -> {
+                myAdapter.updateAdapter(
+                    fillArrays(
+                        resources.getStringArray(R.array.bait),
+                        resources.getStringArray(R.array.bait_description),
+                        getImageId(R.array.bait_image)
+                    )
+                )
+            }
             R.id.history -> Toast.makeText(this, "Test #3", Toast.LENGTH_SHORT).show()
             R.id.tackle -> Toast.makeText(this, "Test #4", Toast.LENGTH_SHORT).show()
         }
 
         return true
+    }
+
+    fun fillArrays(
+        titleArray: Array<String>,
+        contentArray: Array<String>,
+        imageArray: IntArray
+    ): ArrayList<ItemList> {
+        val listItemArray = ArrayList<ItemList>()
+        for (i in titleArray.indices) {
+            val itemList = ItemList(imageArray[i], titleArray[i], contentArray[i])
+            listItemArray.add(itemList)
+        }
+        return listItemArray
+    }
+
+    fun getImageId(imageArrayId: Int): IntArray {
+        val tArray: TypedArray = resources.obtainTypedArray(imageArrayId)
+        val count = tArray.length()
+        val ids = IntArray(count)
+        for (i in ids.indices) {
+            ids[i] = tArray.getResourceId(i, 0)
+        }
+        tArray.recycle()
+        return ids
     }
 }

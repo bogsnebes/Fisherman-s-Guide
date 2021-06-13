@@ -9,24 +9,27 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 
-class MyAdapter(listItems: ArrayList<ListItems>, context: Context) :
+class MyAdapter(itemListItems: ArrayList<ItemList>, context: Context) :
     RecyclerView.Adapter<MyAdapter.ViewHolder>() {
 
-    val listItemsR = listItems
+    private val listItemsR = itemListItems
     val contextR = context
 
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val tvNameList = view.findViewById<TextView>(R.id.tvNameList)
-        val tvDescList = view.findViewById<TextView>(R.id.tvDescrList)
-        val tvImageList = view.findViewById<ImageView>(R.id.im)
+    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        private val tvNameList = view.findViewById<TextView>(R.id.tvNameList)
+        private val tvDescList = view.findViewById<TextView>(R.id.tvDescrList)
+        private val tvImageList = view.findViewById<ImageView>(R.id.im)
 
-        fun bind(listItems: ListItems, context: Context) {
-            tvNameList.text = listItems.textName
-            tvDescList.text = listItems.textDesc
-            tvImageList.setImageResource(listItems.im)
+        init {
             itemView.setOnClickListener {
-                Toast.makeText(context, "${tvNameList.text}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(contextR, "${tvNameList.text}", Toast.LENGTH_SHORT).show()
             }
+        }
+
+        fun bind(ItemList: ItemList) {
+            tvNameList.text = ItemList.textName
+            tvDescList.text = ItemList.textDesc
+            tvImageList.setImageResource(ItemList.im)
         }
     }
 
@@ -36,11 +39,16 @@ class MyAdapter(listItems: ArrayList<ListItems>, context: Context) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val listItem = listItemsR.get(position)
-        holder.bind(listItem, contextR)
+        holder.bind(listItemsR[position])
     }
 
     override fun getItemCount(): Int {
         return listItemsR.size
+    }
+
+    fun updateAdapter(listArray: List<ItemList>) {
+        listItemsR.clear()
+        listItemsR.addAll(listArray)
+        notifyDataSetChanged()
     }
 }

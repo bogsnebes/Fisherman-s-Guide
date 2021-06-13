@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="fish">
+        <item>Бог</item>
+        <item>Anonimus</item>
+        <item>Обезьянка</item>
+        <item>Morgenshtern</item>
+    </string-array>
+
+    <string-array name="fish_description">
+        <item>Это Бог</item>
+        <item>Это Анонимус</item>
+        <item>Это monke</item>
+        <item>Это morgen в Армии</item>
+    </string-array>
+
+    <array name="fish_image">
+        <item>@drawable/god</item>
+        <item>@drawable/anonymos</item>
+        <item>@drawable/monke</item>
+        <item>@drawable/morgenshtern</item>
+    </array>
+
+    <string-array name="bait">
+        <item>Не Бог</item>
+        <item>Не Anonimus</item>
+        <item>Не Обезьянка</item>
+        <item>Не Morgenshtern</item>
+    </string-array>
+
+    <string-array name="bait_description">
+        <item>Это не Бог</item>
+        <item>Это не Анонимус</item>
+        <item>Это не monke</item>
+        <item>Это не morgen в Армии</item>
+    </string-array>
+
+    <array name="bait_image">
+        <item>@drawable/god</item>
+        <item>@drawable/anonymos</item>
+        <item>@drawable/monke</item>
+        <item>@drawable/morgenshtern</item>
+    </array>
+</resources>
