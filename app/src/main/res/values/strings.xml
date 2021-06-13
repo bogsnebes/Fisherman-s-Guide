@@ -4,4 +4,15 @@
     <string name="bait">Наживки</string>
     <string name="tackle">Снасти</string>
     <string name="history">Истории</string>
+
+    <string name="photo">photo</string>
+
+    <string name="god">Бог</string>
+    <string name="god_description">Это Бог</string>
+    <string name="Anonimus">Anonimus</string>
+    <string name="Anonimus_description">Это Анонимус</string>
+    <string name="monke">Обезьянка</string>
+    <string name="monke_description">Это monke</string>
+    <string name="Morgenshtern">Morgenshtern</string>
+    <string name="Morgenshtern_description">Это morgen в Армии</string>
 </resources>
